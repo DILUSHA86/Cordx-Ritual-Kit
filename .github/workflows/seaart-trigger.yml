@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run a one-line script
+        run: echo "Hello, Cordx Ritual Kit!"
+
+      - name: Run a multi-line script
+        run: |
+          echo "Building your ceremonial deployment..."
+          echo "Testing and preparing for cosmic broadcast..."
+          echo "Ready to deploy your Codex-powered ritual."
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ritual-artifacts
+          path: |
+            ./dist
+            ./codex
+
+      - name: Final echo
+        run: echo "Workflow complete. Ritual sealed."
